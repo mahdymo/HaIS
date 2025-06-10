@@ -1,7 +1,7 @@
 
-# MIS Platform - Containerized Microservices Architecture
+# HaIS Platform - Containerized Microservices Architecture
 
-This document describes the containerized microservices architecture for the Machine Identity Security Platform.
+This document describes the containerized microservices architecture for the Machine Identity Security Platform (Hawya Identity Security)
 
 ## Architecture Overview
 

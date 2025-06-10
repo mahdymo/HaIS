@@ -1,0 +1,181 @@
+
+version: '3.8'
+
+services:
+  # Frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - api-gateway
+    environment:
+      - REACT_APP_API_BASE_URL=http://localhost:3000/api
+    networks:
+      - mis-network
+
+  # API Gateway
+  api-gateway:
+    build:
+      context: .
+      dockerfile: docker/api-gateway/Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - ja4-service
+      - spire-service
+      - correlation-service
+      - identity-service
+      - policy-service
+      - alert-service
+      - threat-service
+    environment:
+      - JA4_SERVICE_URL=http://ja4-service:3001
+      - SPIRE_SERVICE_URL=http://spire-service:3002
+      - CORRELATION_SERVICE_URL=http://correlation-service:3003
+      - IDENTITY_SERVICE_URL=http://identity-service:3004
+      - POLICY_SERVICE_URL=http://policy-service:3005
+      - ALERT_SERVICE_URL=http://alert-service:3006
+      - THREAT_SERVICE_URL=http://threat-service:3007
+    networks:
+      - mis-network
+
+  # Microservices
+  ja4-service:
+    build:
+      context: .
+      dockerfile: docker/ja4-service/Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+    networks:
+      - mis-network
+    volumes:
+      - ja4-data:/app/data
+
+  spire-service:
+    build:
+      context: .
+      dockerfile: docker/spire-service/Dockerfile
+    ports:
+      - "3002:3002"
+    environment:
+      - NODE_ENV=production
+      - PORT=3002
+    networks:
+      - mis-network
+    volumes:
+      - spire-data:/app/data
+
+  correlation-service:
+    build:
+      context: .
+      dockerfile: docker/correlation-service/Dockerfile
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=production
+      - PORT=3003
+    networks:
+      - mis-network
+    volumes:
+      - correlation-data:/app/data
+
+  identity-service:
+    build:
+      context: .
+      dockerfile: docker/identity-service/Dockerfile
+    ports:
+      - "3004:3004"
+    environment:
+      - NODE_ENV=production
+      - PORT=3004
+    networks:
+      - mis-network
+    volumes:
+      - identity-data:/app/data
+
+  policy-service:
+    build:
+      context: .
+      dockerfile: docker/policy-service/Dockerfile
+    ports:
+      - "3005:3005"
+    environment:
+      - NODE_ENV=production
+      - PORT=3005
+    networks:
+      - mis-network
+    volumes:
+      - policy-data:/app/data
+
+  alert-service:
+    build:
+      context: .
+      dockerfile: docker/alert-service/Dockerfile
+    ports:
+      - "3006:3006"
+    environment:
+      - NODE_ENV=production
+      - PORT=3006
+    networks:
+      - mis-network
+    volumes:
+      - alert-data:/app/data
+
+  threat-service:
+    build:
+      context: .
+      dockerfile: docker/threat-service/Dockerfile
+    ports:
+      - "3007:3007"
+    environment:
+      - NODE_ENV=production
+      - PORT=3007
+    networks:
+      - mis-network
+    volumes:
+      - threat-data:/app/data
+
+  # Database for shared data
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=mis_platform
+      - POSTGRES_USER=mis_user
+      - POSTGRES_PASSWORD=mis_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - mis-network
+
+  # Redis for caching and pub/sub
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - mis-network
+
+volumes:
+  ja4-data:
+  spire-data:
+  correlation-data:
+  identity-data:
+  policy-data:
+  alert-data:
+  threat-data:
+  postgres-data:
+  redis-data:
+
+networks:
+  mis-network:
+    driver: bridge

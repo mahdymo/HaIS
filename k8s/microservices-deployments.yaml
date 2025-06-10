@@ -1,0 +1,231 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ja4-service
+  namespace: mis-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ja4-service
+  template:
+    metadata:
+      labels:
+        app: ja4-service
+    spec:
+      containers:
+      - name: ja4-service
+        image: mis-platform/ja4-service:latest
+        ports:
+        - containerPort: 3001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ja4-service
+  namespace: mis-platform
+spec:
+  selector:
+    app: ja4-service
+  ports:
+  - port: 3001
+    targetPort: 3001
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spire-service
+  namespace: mis-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spire-service
+  template:
+    metadata:
+      labels:
+        app: spire-service
+    spec:
+      containers:
+      - name: spire-service
+        image: mis-platform/spire-service:latest
+        ports:
+        - containerPort: 3002
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spire-service
+  namespace: mis-platform
+spec:
+  selector:
+    app: spire-service
+  ports:
+  - port: 3002
+    targetPort: 3002
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: correlation-service
+  namespace: mis-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: correlation-service
+  template:
+    metadata:
+      labels:
+        app: correlation-service
+    spec:
+      containers:
+      - name: correlation-service
+        image: mis-platform/correlation-service:latest
+        ports:
+        - containerPort: 3003
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: correlation-service
+  namespace: mis-platform
+spec:
+  selector:
+    app: correlation-service
+  ports:
+  - port: 3003
+    targetPort: 3003
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: identity-service
+  namespace: mis-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: identity-service
+  template:
+    metadata:
+      labels:
+        app: identity-service
+    spec:
+      containers:
+      - name: identity-service
+        image: mis-platform/identity-service:latest
+        ports:
+        - containerPort: 3004
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: identity-service
+  namespace: mis-platform
+spec:
+  selector:
+    app: identity-service
+  ports:
+  - port: 3004
+    targetPort: 3004
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: policy-service
+  namespace: mis-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: policy-service
+  template:
+    metadata:
+      labels:
+        app: policy-service
+    spec:
+      containers:
+      - name: policy-service
+        image: mis-platform/policy-service:latest
+        ports:
+        - containerPort: 3005
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: policy-service
+  namespace: mis-platform
+spec:
+  selector:
+    app: policy-service
+  ports:
+  - port: 3005
+    targetPort: 3005
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alert-service
+  namespace: mis-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alert-service
+  template:
+    metadata:
+      labels:
+        app: alert-service
+    spec:
+      containers:
+      - name: alert-service
+        image: mis-platform/alert-service:latest
+        ports:
+        - containerPort: 3006
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alert-service
+  namespace: mis-platform
+spec:
+  selector:
+    app: alert-service
+  ports:
+  - port: 3006
+    targetPort: 3006
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: threat-service
+  namespace: mis-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: threat-service
+  template:
+    metadata:
+      labels:
+        app: threat-service
+    spec:
+      containers:
+      - name: threat-service
+        image: mis-platform/threat-service:latest
+        ports:
+        - containerPort: 3007
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: threat-service
+  namespace: mis-platform
+spec:
+  selector:
+    app: threat-service
+  ports:
+  - port: 3007
+    targetPort: 3007

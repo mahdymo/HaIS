@@ -1,17 +1,25 @@
 
 import React from 'react';
 import { Server, Users, Key, CheckCircle, XCircle } from 'lucide-react';
+import { useSpireData } from '../hooks/useServices';
 
 export const SpireStatus = () => {
-  const components = [
+  const { data, loading } = useSpireData();
+
+  const components = data?.components || [
     { name: 'SPIRE Server', status: 'online', icon: Server, count: 1 },
     { name: 'SPIRE Agents', status: 'online', icon: Users, count: 12 },
     { name: 'Workload Entries', status: 'online', icon: Key, count: 47 }
   ];
 
+  const lastSync = data?.status?.lastSync || '2024-06-10 14:25:33 UTC';
+
   return (
     <div className="bg-gray-800 rounded-lg border border-gray-700 p-6">
-      <h2 className="text-xl font-semibold text-cyan-400 mb-6">SPIRE Infrastructure</h2>
+      <h2 className="text-xl font-semibold text-cyan-400 mb-6 flex items-center">
+        SPIRE Infrastructure
+        {loading && <div className="ml-2 text-xs text-amber-400">Connecting...</div>}
+      </h2>
       
       <div className="space-y-4">
         {components.map((component) => {
@@ -37,7 +45,7 @@ export const SpireStatus = () => {
 
       <div className="mt-6 pt-4 border-t border-gray-600">
         <div className="text-sm text-gray-400">Last Sync</div>
-        <div className="text-sm font-mono text-cyan-400">2024-06-10 14:25:33 UTC</div>
+        <div className="text-sm font-mono text-cyan-400">{lastSync}</div>
       </div>
     </div>
   );

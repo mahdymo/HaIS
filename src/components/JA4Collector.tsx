@@ -1,21 +1,28 @@
 
 import React, { useState, useEffect } from 'react';
 import { Activity, Network, Eye } from 'lucide-react';
+import { useJA4Data } from '../hooks/useServices';
 
 export const JA4Collector = () => {
+  const { data, loading } = useJA4Data();
   const [packets, setPackets] = useState(0);
   const [fingerprints, setFingerprints] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setPackets(prev => prev + Math.floor(Math.random() * 10) + 1);
-      setFingerprints(prev => prev + Math.floor(Math.random() * 3));
-    }, 2000);
+    if (data?.metrics) {
+      setPackets(data.metrics.packets);
+      setFingerprints(data.metrics.fingerprints);
+    } else {
+      // Fallback animation for when services are not available
+      const interval = setInterval(() => {
+        setPackets(prev => prev + Math.floor(Math.random() * 10) + 1);
+        setFingerprints(prev => prev + Math.floor(Math.random() * 3));
+      }, 2000);
+      return () => clearInterval(interval);
+    }
+  }, [data]);
 
-    return () => clearInterval(interval);
-  }, []);
-
-  const recentFingerprints = [
+  const recentFingerprints = data?.fingerprints || [
     { id: 1, ja4: 't13d1516h2_8daaf6152771_b0da82dd1658', source: '10.0.1.25', risk: 'low' },
     { id: 2, ja4: 't13d1517h2_9ebbf7263882_c1eb93ee2769', source: '192.168.1.45', risk: 'medium' },
     { id: 3, ja4: 't13d1518h2_afccf8374993_d2fc04ff3870', source: '10.0.2.33', risk: 'high' },
@@ -29,8 +36,10 @@ export const JA4Collector = () => {
           JA4+ Fingerprint Collector
         </h2>
         <div className="flex items-center space-x-2">
-          <Activity className="h-4 w-4 text-green-400 animate-pulse" />
-          <span className="text-sm text-green-400">Active</span>
+          <Activity className={`h-4 w-4 ${loading ? 'text-amber-400' : 'text-green-400'} animate-pulse`} />
+          <span className={`text-sm ${loading ? 'text-amber-400' : 'text-green-400'}`}>
+            {loading ? 'Connecting...' : 'Active'}
+          </span>
         </div>
       </div>
 

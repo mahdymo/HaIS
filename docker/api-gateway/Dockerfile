@@ -3,7 +3,7 @@ FROM node:18-alpine
 
 WORKDIR /app
 COPY services/api-gateway/package*.json ./
-RUN npm ci --only=production
+RUN npm install --only=production
 
 COPY services/api-gateway/ .
 

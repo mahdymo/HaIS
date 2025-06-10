@@ -3,7 +3,7 @@ FROM node:18-alpine
 
 WORKDIR /app
 COPY services/ja4-service/package*.json ./
-RUN npm ci --only=production
+RUN npm install --only=production
 
 COPY services/ja4-service/ .
 

@@ -1,0 +1,18 @@
+
+{
+  "name": "alert-service",
+  "version": "1.0.0",
+  "description": "Security notifications and alerts service",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "keywords": ["alerts", "notifications", "security"],
+  "author": "MIS Platform",
+  "license": "MIT"
+}

@@ -1,7 +1,7 @@
 
 import { ServiceResponse } from './types';
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080/api';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000/api';
 
 class ApiClient {
   private baseUrl: string;
@@ -12,6 +12,7 @@ class ApiClient {
 
   async get<T>(endpoint: string): Promise<ServiceResponse<T>> {
     try {
+      console.log(`Fetching: ${this.baseUrl}${endpoint}`);
       const response = await fetch(`${this.baseUrl}${endpoint}`);
       const data = await response.json();
       return {
@@ -20,6 +21,7 @@ class ApiClient {
         message: response.ok ? undefined : data.message
       };
     } catch (error) {
+      console.error(`API Error for ${endpoint}:`, error);
       return {
         data: {} as T,
         status: 'error',

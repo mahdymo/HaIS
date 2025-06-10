@@ -11,7 +11,7 @@ const Index = () => {
       <main className="container mx-auto px-6 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">
-            Machine Identity Security Platform
+            Hawya Identity Security Platform
           </h1>
           <p className="text-gray-400">SPIFFE + JA4+ Zero-Trust Environment</p>
         </div>

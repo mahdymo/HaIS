@@ -13,6 +13,6 @@
     "cors": "^2.8.5"
   },
   "keywords": ["correlation", "behavioral-analysis", "threat-detection"],
-  "author": "MIS Platform",
+  "author": "HaIS Platform",
   "license": "MIT"
 }

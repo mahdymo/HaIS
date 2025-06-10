@@ -52,8 +52,8 @@ chmod +x scripts/deploy-k8s.sh
 ./scripts/deploy-k8s.sh
 
 # Check deployment status
-kubectl get pods -n mis-platform
-kubectl get services -n mis-platform
+kubectl get pods -n hais-platform
+kubectl get services -n hais-platform
 ```
 
 ## Service Communication

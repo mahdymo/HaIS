@@ -14,7 +14,7 @@ services:
     environment:
       - REACT_APP_API_BASE_URL=http://localhost:3000/api
     networks:
-      - mis-network
+      - hais-network
 
   # API Gateway
   api-gateway:
@@ -40,7 +40,7 @@ services:
       - ALERT_SERVICE_URL=http://alert-service:3006
       - THREAT_SERVICE_URL=http://threat-service:3007
     networks:
-      - mis-network
+      - hais-network
 
   # Microservices
   ja4-service:
@@ -53,7 +53,7 @@ services:
       - NODE_ENV=production
       - PORT=3001
     networks:
-      - mis-network
+      - hais-network
     volumes:
       - ja4-data:/app/data
 
@@ -67,7 +67,7 @@ services:
       - NODE_ENV=production
       - PORT=3002
     networks:
-      - mis-network
+      - hais-network
     volumes:
       - spire-data:/app/data
 
@@ -81,7 +81,7 @@ services:
       - NODE_ENV=production
       - PORT=3003
     networks:
-      - mis-network
+      - hais-network
     volumes:
       - correlation-data:/app/data
 
@@ -95,7 +95,7 @@ services:
       - NODE_ENV=production
       - PORT=3004
     networks:
-      - mis-network
+      - hais-network
     volumes:
       - identity-data:/app/data
 
@@ -109,7 +109,7 @@ services:
       - NODE_ENV=production
       - PORT=3005
     networks:
-      - mis-network
+      - hais-network
     volumes:
       - policy-data:/app/data
 
@@ -123,7 +123,7 @@ services:
       - NODE_ENV=production
       - PORT=3006
     networks:
-      - mis-network
+      - hais-network
     volumes:
       - alert-data:/app/data
 
@@ -137,7 +137,7 @@ services:
       - NODE_ENV=production
       - PORT=3007
     networks:
-      - mis-network
+      - hais-network
     volumes:
       - threat-data:/app/data
 
@@ -145,15 +145,15 @@ services:
   postgres:
     image: postgres:15-alpine
     environment:
-      - POSTGRES_DB=mis_platform
-      - POSTGRES_USER=mis_user
-      - POSTGRES_PASSWORD=mis_password
+      - POSTGRES_DB=hais_platform
+      - POSTGRES_USER=hais_user
+      - POSTGRES_PASSWORD=hais_password
     ports:
       - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
-      - mis-network
+      - hais-network
 
   # Redis for caching and pub/sub
   redis:
@@ -163,7 +163,7 @@ services:
     volumes:
       - redis-data:/data
     networks:
-      - mis-network
+      - hais-network
 
 volumes:
   ja4-data:
@@ -177,5 +177,5 @@ volumes:
   redis-data:
 
 networks:
-  mis-network:
+  hais-network:
     driver: bridge

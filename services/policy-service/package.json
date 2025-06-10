@@ -13,6 +13,6 @@
     "cors": "^2.8.5"
   },
   "keywords": ["policy", "zero-trust", "enforcement"],
-  "author": "MIS Platform",
+  "author": "HaIS Platform",
   "license": "MIT"
 }

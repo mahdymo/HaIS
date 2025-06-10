@@ -13,6 +13,6 @@
     "cors": "^2.8.5"
   },
   "keywords": ["threat-intelligence", "geographic", "security"],
-  "author": "MIS Platform",
+  "author": "HaIS Platform",
   "license": "MIT"
 }

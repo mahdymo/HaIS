@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Shield, Activity, AlertTriangle, TestTube } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
@@ -11,7 +12,7 @@ export const Header = () => {
         <div className="flex items-center space-x-3">
           <Shield className="h-8 w-8 text-cyan-400" />
           <Link to="/" className="text-xl font-bold hover:text-cyan-400 transition-colors">
-            MIS Platform
+            HaIS Platform
           </Link>
         </div>
         

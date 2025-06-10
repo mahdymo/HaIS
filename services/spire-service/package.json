@@ -13,6 +13,6 @@
     "cors": "^2.8.5"
   },
   "keywords": ["spire", "infrastructure", "monitoring"],
-  "author": "MIS Platform",
+  "author": "HaIS Platform",
   "license": "MIT"
 }

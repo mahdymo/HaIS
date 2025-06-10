@@ -15,9 +15,9 @@ echo "Deploying microservices..."
 kubectl apply -f k8s/microservices-deployments.yaml
 
 echo "Waiting for deployments to be ready..."
-kubectl wait --for=condition=available --timeout=300s deployment --all -n mis-platform
+kubectl wait --for=condition=available --timeout=300s deployment --all -n hais-platform
 
 echo "Getting service URLs..."
-kubectl get services -n mis-platform
+kubectl get services -n hais-platform
 
 echo "Deployment complete!"

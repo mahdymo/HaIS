@@ -1,4 +1,6 @@
+
 import { TestRunner } from '../utils/testRunner';
+import { runDataGenerationTests } from './dataGenerationTests';
 
 export const runComponentTests = async (testRunner: TestRunner) => {
   // Test JA4 Collector functionality
@@ -167,4 +169,7 @@ export const runComponentTests = async (testRunner: TestRunner) => {
       }
     }
   ]);
+
+  // Run the new data generation tests
+  await runDataGenerationTests(testRunner);
 };

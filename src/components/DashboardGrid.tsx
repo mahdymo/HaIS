@@ -6,6 +6,7 @@ import { CorrelationEngine } from './CorrelationEngine';
 import { IdentityManager } from './IdentityManager';
 import { ThreatMap } from './ThreatMap';
 import { PolicyManager } from './PolicyManager';
+import { AnomalyDetectionDashboard } from './AnomalyDetectionDashboard';
 
 export const DashboardGrid = () => {
   return (
@@ -24,6 +25,9 @@ export const DashboardGrid = () => {
       </div>
       <div>
         <ThreatMap />
+      </div>
+      <div className="lg:col-span-2 xl:col-span-3">
+        <AnomalyDetectionDashboard />
       </div>
       <div className="lg:col-span-2">
         <PolicyManager />

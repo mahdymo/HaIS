@@ -20,6 +20,10 @@ spec:
         ports:
         - containerPort: 3000
         env:
+        - name: HOST
+          value: "0.0.0.0"
+        - name: PORT
+          value: "3000"
         - name: JA4_SERVICE_URL
           value: "http://ja4-service:3001"
         - name: SPIRE_SERVICE_URL
@@ -46,3 +50,4 @@ spec:
   ports:
   - port: 3000
     targetPort: 3000
+  type: LoadBalancer

@@ -5,8 +5,14 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || '0.0.0.0'; // Listen on all interfaces
 
-app.use(cors());
+app.use(cors({
+  origin: '*', // Allow all origins for external access
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 
 // Health check
@@ -57,8 +63,8 @@ app.use('/api/threat', createProxyMiddleware({
   pathRewrite: { '^/api/threat': '/api' }
 }));
 
-app.listen(PORT, () => {
-  console.log(`API Gateway running on port ${PORT}`);
+app.listen(PORT, HOST, () => {
+  console.log(`API Gateway running on ${HOST}:${PORT}`);
   console.log('Available routes:');
   console.log('  /api/ja4/* -> JA4 Service');
   console.log('  /api/spire/* -> SPIRE Service');

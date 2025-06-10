@@ -32,6 +32,8 @@ services:
       - alert-service
       - threat-service
     environment:
+      - HOST=0.0.0.0
+      - PORT=3000
       - JA4_SERVICE_URL=http://ja4-service:3001
       - SPIRE_SERVICE_URL=http://spire-service:3002
       - CORRELATION_SERVICE_URL=http://correlation-service:3003
